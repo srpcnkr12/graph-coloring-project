@@ -1,0 +1,67 @@
+================================================================================
+HEURISTIC QUALITY ANALYSIS REPORT
+================================================================================
+Total tests performed: 123
+Graph size range: 3 - 9 vertices
+Graph types: complete, cycle, path, random_0.2, random_0.5, random_0.8
+
+
+DSATUR ALGORITHM QUALITY:
+----------------------------------------
+Mean approximation ratio: 1.000
+Worst-case ratio: 1.000
+Standard deviation: 0.000
+95th percentile: 1.000
+Optimal solutions: 123/123 (100.0%)
+Quality classification: Excellent (≤1.1 avg)
+
+LDF ALGORITHM QUALITY:
+----------------------------------------
+Mean approximation ratio: 1.003
+Worst-case ratio: 1.333
+Standard deviation: 0.030
+95th percentile: 1.000
+Optimal solutions: 122/123 (99.2%)
+Quality classification: Excellent (≤1.1 avg)
+
+HYBRID ALGORITHM QUALITY:
+----------------------------------------
+Mean approximation ratio: 1.000
+Worst-case ratio: 1.000
+Standard deviation: 0.000
+95th percentile: 1.000
+Optimal solutions: 123/123 (100.0%)
+Quality classification: Excellent (≤1.1 avg)
+
+QUALITY BY GRAPH TYPE:
+------------------------------
+
+COMPLETE:
+  DSATUR: 1.000 ratio, 100.0% optimal
+  LDF: 1.000 ratio, 100.0% optimal
+  HYBRID: 1.000 ratio, 100.0% optimal
+
+CYCLE:
+  DSATUR: 1.000 ratio, 100.0% optimal
+  LDF: 1.000 ratio, 100.0% optimal
+  HYBRID: 1.000 ratio, 100.0% optimal
+
+PATH:
+  DSATUR: 1.000 ratio, 100.0% optimal
+  LDF: 1.000 ratio, 100.0% optimal
+  HYBRID: 1.000 ratio, 100.0% optimal
+
+RANDOM_0.2:
+  DSATUR: 1.000 ratio, 100.0% optimal
+  LDF: 1.000 ratio, 100.0% optimal
+  HYBRID: 1.000 ratio, 100.0% optimal
+
+RANDOM_0.5:
+  DSATUR: 1.000 ratio, 100.0% optimal
+  LDF: 1.010 ratio, 97.1% optimal
+  HYBRID: 1.000 ratio, 100.0% optimal
+
+RANDOM_0.8:
+  DSATUR: 1.000 ratio, 100.0% optimal
+  LDF: 1.000 ratio, 100.0% optimal
+  HYBRID: 1.000 ratio, 100.0% optimal

@@ -147,7 +147,7 @@ class PerformanceTester:
             # Run multiple measurements
             measurements = self.run_multiple_measurements(
                 heuristic.solve, n_runs, method
-            )\n
+            )
             # Calculate statistics
             mean, std_error, lower_bound, upper_bound = self.calculate_confidence_interval(measurements)
             margin_error = upper_bound - mean

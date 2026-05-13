@@ -127,7 +127,7 @@ def main():
     for i, (method, ratio) in enumerate(sorted_by_quality, 1):
         speed_rank = speed_ranking[method]
         overall_score = i + speed_rank  # Lower is better
-        print(f"{method.upper():<10} #{i} ({ratio:.3f})<6} #{speed_rank} (complexity)<9} #{overall_score}")
+        print(f"{method.upper():<10} #{i} ({ratio:.3f}) {'':<6} #{speed_rank} (complexity) {'':<9} #{overall_score}")
 
     # Statistical significance
     print("\n7. STATISTICAL SIGNIFICANCE")
