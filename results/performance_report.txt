@@ -1,0 +1,36 @@
+================================================================================
+STATISTICAL PERFORMANCE ANALYSIS REPORT
+================================================================================
+Confidence Level: 90%
+Analysis Date: 2026-05-13 20:01:20
+
+
+DSATUR ALGORITHM ANALYSIS:
+----------------------------------------
+Graph size range: 20 - 1100 vertices
+Total measurements: 460
+Mean execution time range: 0.000100 - 5.504195 seconds
+Narrow confidence intervals: 23/23 (100.0%)
+Best fitting curve: quadratic (R² = 0.9941)
+Equation: T(n) = 6.64e-06*n² + -2.77e-03*n + 2.21e-01
+Complexity class: O(n²) - Quadratic
+
+LDF ALGORITHM ANALYSIS:
+----------------------------------------
+Graph size range: 20 - 1100 vertices
+Total measurements: 460
+Mean execution time range: 0.000013 - 0.012099 seconds
+Narrow confidence intervals: 22/23 (95.7%)
+Best fitting curve: quadratic (R² = 0.9920)
+Equation: T(n) = 1.04e-08*n² + 2.01e-07*n + -3.71e-05
+Complexity class: O(n²) - Quadratic
+
+HYBRID ALGORITHM ANALYSIS:
+----------------------------------------
+Graph size range: 20 - 1100 vertices
+Total measurements: 460
+Mean execution time range: 0.000120 - 5.646642 seconds
+Narrow confidence intervals: 23/23 (100.0%)
+Best fitting curve: quadratic (R² = 0.9935)
+Equation: T(n) = 6.83e-06*n² + -2.87e-03*n + 2.32e-01
+Complexity class: O(n²) - Quadratic
