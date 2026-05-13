@@ -4,6 +4,7 @@ Fast approximation algorithms that may not guarantee optimal solutions.
 """
 
 import time
+import random
 from typing import Dict, List, Tuple
 try:
     from .graph import Graph
@@ -242,12 +243,82 @@ class HeuristicColoring:
                 return False
         return True
 
+    def hybrid_coloring(self) -> Tuple[Dict[int, int], int, float]:
+        """
+        Hybrid algorithm that runs multiple heuristics and picks the best result.
+
+        Returns:
+            Tuple containing best coloring, number of colors, and total elapsed time
+        """
+        start_time = time.time()
+
+        # Run all heuristic methods
+        methods = ['dsatur', 'sdl', 'ldf', 'greedy']
+        results = []
+
+        for method in methods:
+            if method == 'greedy':
+                coloring, colors, _ = self.greedy_coloring()
+            elif method == 'ldf':
+                coloring, colors, _ = self.largest_degree_first()
+            elif method == 'sdl':
+                coloring, colors, _ = self.smallest_degree_last()
+            elif method == 'dsatur':
+                coloring, colors, _ = self.dsatur_coloring()
+
+            results.append((coloring, colors, method))
+
+        # Choose the result with minimum colors
+        best_coloring, best_colors, best_method = min(results, key=lambda x: x[1])
+
+        elapsed_time = time.time() - start_time
+        return best_coloring, best_colors, elapsed_time
+
+    def improved_greedy_coloring(self) -> Tuple[Dict[int, int], int, float]:
+        """
+        Improved greedy algorithm with better vertex ordering.
+        Uses degree-based ordering with tie-breaking strategies.
+
+        Returns:
+            Tuple containing coloring, number of colors, and elapsed time
+        """
+        start_time = time.time()
+
+        # Sort vertices by degree (descending), then by number of colored neighbors
+        coloring = {}
+
+        # Initial ordering by degree
+        vertices_by_degree = sorted(
+            self.vertices,
+            key=lambda v: (self.graph.degree(v), random.random()),
+            reverse=True
+        )
+
+        for vertex in vertices_by_degree:
+            # Get colors of already colored neighbors
+            neighbor_colors = {
+                coloring[neighbor]
+                for neighbor in self.graph.get_neighbors(vertex)
+                if neighbor in coloring
+            }
+
+            # Find the smallest color not used by neighbors
+            color = 0
+            while color in neighbor_colors:
+                color += 1
+
+            coloring[vertex] = color
+
+        elapsed_time = time.time() - start_time
+        num_colors = len(set(coloring.values()))
+        return coloring, num_colors, elapsed_time
+
     def solve(self, method: str = 'greedy') -> Tuple[Dict[int, int], int, float]:
         """
         Solve graph coloring using specified heuristic method.
 
         Args:
-            method: Algorithm to use ('greedy', 'ldf', 'sdl', 'dsatur')
+            method: Algorithm to use ('greedy', 'ldf', 'sdl', 'dsatur', 'hybrid', 'improved_greedy')
 
         Returns:
             Tuple containing coloring, number of colors, and elapsed time
@@ -260,6 +331,10 @@ class HeuristicColoring:
             return self.smallest_degree_last()
         elif method == 'dsatur':
             return self.dsatur_coloring()
+        elif method == 'hybrid':
+            return self.hybrid_coloring()
+        elif method == 'improved_greedy':
+            return self.improved_greedy_coloring()
         else:
             raise ValueError(f"Unknown method: {method}")
 
@@ -270,7 +345,7 @@ class HeuristicColoring:
         Returns:
             Dictionary containing results for each method
         """
-        methods = ['greedy', 'ldf', 'sdl', 'dsatur']
+        methods = ['greedy', 'ldf', 'sdl', 'dsatur', 'hybrid', 'improved_greedy']
         results = {}
 
         for method in methods:
