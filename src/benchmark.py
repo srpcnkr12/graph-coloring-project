@@ -91,7 +91,7 @@ class BenchmarkSuite:
 
         # Test all heuristic methods
         heuristic = HeuristicColoring(graph)
-        methods = ['greedy', 'ldf', 'sdl', 'dsatur', 'hybrid', 'improved_greedy']
+        methods = ['dsatur', 'ldf', 'hybrid']
 
         result = {
             'vertices': n_vertices,
@@ -119,7 +119,7 @@ class BenchmarkSuite:
             print("No results available. Run accuracy analysis first.")
             return pd.DataFrame()
 
-        methods = ['greedy', 'ldf', 'sdl', 'dsatur']
+        methods = ['dsatur', 'ldf', 'hybrid']
         summary = []
 
         for graph_type in self.results['graph_type'].unique():
@@ -166,7 +166,7 @@ class BenchmarkSuite:
             print("No results available. Run accuracy analysis first.")
             return {}
 
-        methods = ['greedy', 'ldf', 'sdl', 'dsatur', 'hybrid', 'improved_greedy']
+        methods = ['dsatur', 'ldf', 'hybrid']
         comparison = {}
 
         for method in methods:

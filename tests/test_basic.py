@@ -76,21 +76,21 @@ class TestBruteForce(unittest.TestCase):
 class TestHeuristic(unittest.TestCase):
     """Test the Heuristic algorithms."""
 
-    def test_greedy_triangle(self):
-        """Test greedy algorithm on triangle."""
+    def test_dsatur_triangle(self):
+        """Test DSATUR algorithm on triangle."""
         g = generate_complete_graph(3)
         h = HeuristicColoring(g)
-        coloring, num_colors, _ = h.greedy_coloring()
+        coloring, num_colors, _ = h.dsatur_coloring()
 
         self.assertTrue(h.is_valid_coloring(coloring))
-        self.assertGreaterEqual(num_colors, 3)  # Should be exactly 3, might be more
+        self.assertEqual(num_colors, 3)  # Triangle requires exactly 3 colors
 
     def test_all_methods_valid(self):
         """Test that all heuristic methods produce valid colorings."""
         g = generate_cycle_graph(5)
         h = HeuristicColoring(g)
 
-        methods = ['greedy', 'ldf', 'sdl', 'dsatur']
+        methods = ['dsatur', 'ldf', 'hybrid']
         for method in methods:
             with self.subTest(method=method):
                 coloring, _, _ = h.solve(method)

@@ -246,23 +246,20 @@ class HeuristicColoring:
     def hybrid_coloring(self) -> Tuple[Dict[int, int], int, float]:
         """
         Hybrid algorithm that runs multiple heuristics and picks the best result.
+        Uses DSATUR and LDF as base algorithms for optimal performance.
 
         Returns:
             Tuple containing best coloring, number of colors, and total elapsed time
         """
         start_time = time.time()
 
-        # Run all heuristic methods
-        methods = ['dsatur', 'sdl', 'ldf', 'greedy']
+        # Run selected high-quality heuristic methods
+        methods = ['dsatur', 'ldf']
         results = []
 
         for method in methods:
-            if method == 'greedy':
-                coloring, colors, _ = self.greedy_coloring()
-            elif method == 'ldf':
+            if method == 'ldf':
                 coloring, colors, _ = self.largest_degree_first()
-            elif method == 'sdl':
-                coloring, colors, _ = self.smallest_degree_last()
             elif method == 'dsatur':
                 coloring, colors, _ = self.dsatur_coloring()
 
@@ -313,30 +310,24 @@ class HeuristicColoring:
         num_colors = len(set(coloring.values()))
         return coloring, num_colors, elapsed_time
 
-    def solve(self, method: str = 'greedy') -> Tuple[Dict[int, int], int, float]:
+    def solve(self, method: str = 'dsatur') -> Tuple[Dict[int, int], int, float]:
         """
         Solve graph coloring using specified heuristic method.
 
         Args:
-            method: Algorithm to use ('greedy', 'ldf', 'sdl', 'dsatur', 'hybrid', 'improved_greedy')
+            method: Algorithm to use ('dsatur', 'ldf', 'hybrid')
 
         Returns:
             Tuple containing coloring, number of colors, and elapsed time
         """
-        if method == 'greedy':
-            return self.greedy_coloring()
+        if method == 'dsatur':
+            return self.dsatur_coloring()
         elif method == 'ldf':
             return self.largest_degree_first()
-        elif method == 'sdl':
-            return self.smallest_degree_last()
-        elif method == 'dsatur':
-            return self.dsatur_coloring()
         elif method == 'hybrid':
             return self.hybrid_coloring()
-        elif method == 'improved_greedy':
-            return self.improved_greedy_coloring()
         else:
-            raise ValueError(f"Unknown method: {method}")
+            raise ValueError(f"Unknown method: {method}. Available methods: 'dsatur', 'ldf', 'hybrid'")
 
     def compare_methods(self) -> Dict[str, Dict[str, any]]:
         """
@@ -345,7 +336,7 @@ class HeuristicColoring:
         Returns:
             Dictionary containing results for each method
         """
-        methods = ['greedy', 'ldf', 'sdl', 'dsatur', 'hybrid', 'improved_greedy']
+        methods = ['dsatur', 'ldf', 'hybrid']
         results = {}
 
         for method in methods:

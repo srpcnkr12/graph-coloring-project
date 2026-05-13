@@ -46,8 +46,8 @@ def main():
             print(f"  {row['method']}: {row['mean_error_rate']:.3f} error rate")
 
     # Find worst cases
-    print("\n4. Worst Cases (Greedy Algorithm):")
-    worst_cases = benchmark.find_worst_cases('greedy', top_n=5)
+    print("\n4. Worst Cases (DSATUR Algorithm):")
+    worst_cases = benchmark.find_worst_cases('dsatur', top_n=5)
     print(worst_cases.to_string(index=False))
 
     # Recommendations

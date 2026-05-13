@@ -46,7 +46,7 @@ def main():
     if len(sparse_data) > 0:
         print(f"\nSparse random graphs tested: {len(sparse_data)}")
 
-        methods_to_check = ['greedy', 'improved_greedy', 'hybrid', 'dsatur']
+        methods_to_check = ['dsatur', 'ldf', 'hybrid']
         for method in methods_to_check:
             error_col = f'{method}_error_rate'
             if error_col in sparse_data.columns:
@@ -58,11 +58,11 @@ def main():
     # Detailed worst cases
     print("\n4. WORST CASES ANALYSIS:")
 
-    # Check if improvements helped with worst cases
-    worst_cases_greedy = benchmark.find_worst_cases('greedy', top_n=3)
-    if not worst_cases_greedy.empty:
-        print("\nWorst cases for GREEDY:")
-        print(worst_cases_greedy[['vertices', 'edges', 'graph_type', 'optimal_colors', 'greedy_colors', 'greedy_error_rate']].to_string(index=False))
+    # Check worst cases for main algorithms
+    worst_cases_dsatur = benchmark.find_worst_cases('dsatur', top_n=3)
+    if not worst_cases_dsatur.empty:
+        print("\nWorst cases for DSATUR:")
+        print(worst_cases_dsatur[['vertices', 'edges', 'graph_type', 'optimal_colors', 'dsatur_colors', 'dsatur_error_rate']].to_string(index=False))
 
     if 'hybrid_error_rate' in results_df.columns:
         worst_cases_hybrid = benchmark.find_worst_cases('hybrid', top_n=3)
